@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Safe Hybrid App</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script>
+        function showAndroidToast(message){
+            Android.showToast(message);
+            var data = Android.getMessage();
+            data = JSON.parse(data);
+            console.log(data.name + data.age);
+            window.document.getElementsByClassName('data')[0].innerHTML = 'your name is: ' + data.name + '; age is: '+ data.age;
+        }
+        function callfuntest(){
+            alert('android call this');
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+<div>
+
+    <input type="button" value="say hello" onClick="showAndroidToast('Hello Android')"/>
+    <a href="http://m.baidu.com">baidu</a><br>
+    <a href="http://mama.baidu.com">mama</a><br>
+    <a href="test-app:next_page">next page</a>
+    <div class="data"></div>
+
+
+</div>
+
+</body>
+
+</html>
