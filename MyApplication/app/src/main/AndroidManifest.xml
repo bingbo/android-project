@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.zhangbingbing.myapplication" >
+    package="com.example.zhangbingbing.myapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -10,8 +10,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -21,7 +21,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".BActivity" />
-        <activity android:name=".Main2Activity" >
+        <activity android:name=".Main2Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,7 +39,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".WebViewActivity" >
+        <activity android:name=".WebViewActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -51,6 +51,7 @@
         <activity android:name=".UIActivity" />
         <activity android:name=".RecyclerViewActivity" />
         <activity android:name=".SpinnerActivity" />
+        <activity android:name=".StoreDataActivity"></activity>
     </application>
 
 </manifest>
