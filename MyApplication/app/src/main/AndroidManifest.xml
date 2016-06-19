@@ -51,7 +51,8 @@
         <activity android:name=".UIActivity" />
         <activity android:name=".RecyclerViewActivity" />
         <activity android:name=".SpinnerActivity" />
-        <activity android:name=".StoreDataActivity"></activity>
+        <activity android:name=".StoreDataActivity" />
+        <activity android:name=".FragmentsActivity"></activity>
     </application>
 
 </manifest>

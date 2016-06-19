@@ -30,31 +30,36 @@
 
     <Button
         android:id="@+id/send_broadcast"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="send broadcast" />
 
     <Button
         android:id="@+id/go_to_ui"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="go to ui activity" />
 
     <Button
         android:id="@+id/go_to_rev_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="go to recycler view" />
 
     <Button
         android:id="@+id/go_to_spinner_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="go to spinner view" />
 
     <Button
         android:id="@+id/go_to_save_data"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="go to save data" />
+    <Button
+        android:id="@+id/go_to_fragment_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="go to fragment activity" />
 </LinearLayout>

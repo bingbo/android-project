@@ -24,6 +24,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.go_to_rev_view).setOnClickListener(this);
         findViewById(R.id.go_to_spinner_view).setOnClickListener(this);
         findViewById(R.id.go_to_save_data).setOnClickListener(this);
+        findViewById(R.id.go_to_fragment_activity).setOnClickListener(this);
 
 
 
@@ -74,6 +75,10 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.go_to_save_data:
                 intent = new Intent(Main2Activity.this,StoreDataActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.go_to_fragment_activity:
+                intent = new Intent(Main2Activity.this,FragmentsActivity.class);
                 startActivity(intent);
                 break;
         }
