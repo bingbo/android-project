@@ -1,16 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.zhangbingbing.myapplication">
+    package="com.example.zhangbingbing.myapplication"
+    android:installLocation="preferExternal">
 
+    <!-- 访问互联网权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 访问精确位置权限 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 允许访问大概的位置信息 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 允许访问额外的位置指令 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <!-- 允许访问网络信息 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 允许访问通知信息策略 -->
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <!-- 允许访问wifi网络信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--
+    允许允许访问账户身份验证信息
+    <uses-permission android:name="android.permission.ACCOUNT_MANAGER"/>
+    -->
+    <!-- 允许拨打电话 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- 允许操作相机 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 允许发送信息 -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <!-- 访问日历读写权限 -->
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
 
+    <!--
+    访问通讯录权限
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.zhangbingbing.myapplication.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+
         <activity android:name=".MainActivity">
 
             <!-- <intent-filter> -->
@@ -52,7 +94,44 @@
         <activity android:name=".RecyclerViewActivity" />
         <activity android:name=".SpinnerActivity" />
         <activity android:name=".StoreDataActivity" />
-        <activity android:name=".FragmentsActivity"></activity>
+        <activity android:name=".FragmentsActivity" />
+        <activity android:name=".ShareActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".FileSelectActivity"
+            android:label="File Selector">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.OPENABLE" />
+
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".FileListActivity"></activity>
     </application>
 
 </manifest>

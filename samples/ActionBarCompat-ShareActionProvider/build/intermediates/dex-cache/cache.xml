@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/zhangbingbing/GitHub/androiddemo/samples/ActionBarCompat-ShareActionProvider/Application/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="8eb268789c4c7d342cd4947d9d70ee1d0ae57c35">
+        <dex dex="/Users/zhangbingbing/GitHub/androiddemo/samples/ActionBarCompat-ShareActionProvider/Application/build/intermediates/pre-dexed/debug/instant-run-bootstrap_78ce0492ebb7aecd5b9e52c5565c2d33f273b97f.jar" />
+    </item>
+    <item
+        jar="/Users/zhangbingbing/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.3.0/support-annotations-23.3.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="/Users/zhangbingbing/GitHub/androiddemo/samples/ActionBarCompat-ShareActionProvider/Application/build/intermediates/pre-dexed/debug/support-annotations-23.3.0_22f9ee2556a663f6f8bf40f607409758524919cf.jar" />
+    </item>
+    <item
+        jar="/Users/zhangbingbing/GitHub/androiddemo/samples/ActionBarCompat-ShareActionProvider/Application/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="/Users/zhangbingbing/GitHub/androiddemo/samples/ActionBarCompat-ShareActionProvider/Application/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.3.0_4d5706a6604393ecbf418b2126862c11ddab6f86.jar" />
+    </item>
+    <item
+        jar="/Users/zhangbingbing/GitHub/androiddemo/samples/ActionBarCompat-ShareActionProvider/Application/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/libs/internal_impl-23.3.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
+        <dex dex="/Users/zhangbingbing/GitHub/androiddemo/samples/ActionBarCompat-ShareActionProvider/Application/build/intermediates/pre-dexed/debug/internal_impl-23.3.0_697970515a57d89d2e374005212dc39ba596facf.jar" />
+    </item>
+    <item
+        jar="/Users/zhangbingbing/GitHub/androiddemo/samples/ActionBarCompat-ShareActionProvider/Application/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="7ae2d38807a43b2f2185ff4089a92c790b579e54">
+        <dex dex="/Users/zhangbingbing/GitHub/androiddemo/samples/ActionBarCompat-ShareActionProvider/Application/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-21.0.2_dbe3b477ee7bdc28dd4ff7bdfd04596b5d8426fc.jar" />
+    </item>
+    <item
+        jar="/Users/zhangbingbing/GitHub/androiddemo/samples/ActionBarCompat-ShareActionProvider/Application/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="82ce13fd19cdfde0e392f03c27edeba8d4333648">
+        <dex dex="/Users/zhangbingbing/GitHub/androiddemo/samples/ActionBarCompat-ShareActionProvider/Application/build/intermediates/pre-dexed/debug/com.android.support-cardview-v7-23.3.0_fe4c709e163f40002dd260c6ebc51b8004d145fb.jar" />
+    </item>
+    <item
+        jar="/Users/zhangbingbing/GitHub/androiddemo/samples/ActionBarCompat-ShareActionProvider/Application/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/23.3.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="003ebdacd5f75067b8724f92bd5eefa323d870aa">
+        <dex dex="/Users/zhangbingbing/GitHub/androiddemo/samples/ActionBarCompat-ShareActionProvider/Application/build/intermediates/pre-dexed/debug/com.android.support-gridlayout-v7-23.3.0_78d3926307a8d129992f09f0d8ff9ddb27012100.jar" />
+    </item>
+    <item
+        jar="/Users/zhangbingbing/GitHub/androiddemo/samples/ActionBarCompat-ShareActionProvider/Application/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="22a6b9aedb37605f066ff5fb9becdc54c86d7cf6">
+        <dex dex="/Users/zhangbingbing/GitHub/androiddemo/samples/ActionBarCompat-ShareActionProvider/Application/build/intermediates/pre-dexed/debug/instant-run_98847b953b548e513f862e15df48bb2c58831441.jar" />
+    </item>
+
+</items>
