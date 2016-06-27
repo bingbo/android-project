@@ -5,6 +5,7 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,6 +54,8 @@ public class FileListActivity extends AppCompatActivity implements AdapterView.O
 
         listView.setOnItemClickListener(this);
 
+        registerForContextMenu(listView);
+
     }
 
 
@@ -60,6 +63,21 @@ public class FileListActivity extends AppCompatActivity implements AdapterView.O
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_item_context_copy:
+                System.out.println("click context menu : "+item.getTitle());
+                return true;
+            case R.id.menu_item_context_cut:
+                System.out.println("click context menu: "+item.getTitle());
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+
     }
 
     @Override

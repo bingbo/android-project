@@ -56,7 +56,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.menu_item_context1:
+            case R.id.menu_item_context_copy:
                 Log.i(TAG,item.getTitle().toString());
                 return true;
             case R.id.menu_item_context_cut:
