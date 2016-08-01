@@ -2,8 +2,10 @@ package com.ibingbo.service;
 
 import com.ibingbo.utils.Http;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -42,26 +44,28 @@ public class UserService {
     }
 
     public Boolean hasUser(Map<String,String> params){
+        boolean exists = false;
         try{
             if(params !=null){
                 StringBuilder sb = new StringBuilder();
                 for(Map.Entry<String,String> entry : params.entrySet()){
-                    sb.append(entry.getKey() + "=" + entry.getValue() +"&");
+                    sb.append(entry.getKey() + "=" + URLEncoder.encode(entry.getValue(),"UTF-8") +"&");
                 }
                 String p = sb.toString();
                 p = p.substring(0,p.length()-1);
                 String url = HOST + API_QUERY_USER;
                 String result = Http.post(url,p);
                 JSONObject user = new JSONObject(result);
-                if(user.get("data") != null){
-                    return true;
+                JSONArray users = user.getJSONArray("data");
+                if(users.length()>0){
+                    exists =  true;
                 }else {
-                    return false;
+                    exists =  false;
                 }
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        return false;
+        return exists;
     }
 }

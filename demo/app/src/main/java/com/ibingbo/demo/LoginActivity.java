@@ -330,9 +330,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Map<String,String> map=new HashMap<String,String>();
                 map.put("email",mEmail);
                 map.put("password",mPassword);
-                //UserService userService =new UserService();
-                //return userService.hasUser(map);
-                return true;
+                UserService userService =new UserService();
+                return userService.hasUser(map);
+                //return true;
 
             } catch (Exception e) {
                 e.printStackTrace();

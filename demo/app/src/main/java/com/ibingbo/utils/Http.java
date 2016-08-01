@@ -1,7 +1,9 @@
 package com.ibingbo.utils;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -20,12 +22,7 @@ public class Http {
             URL uri = new URL(url);
             conn = (HttpURLConnection) uri.openConnection();
             conn.setRequestMethod("GET");
-            //conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded");
             conn.setDoInput(true);
-            //conn.setDoOutput(true);
-
-
-
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String msg = "";
             while ((msg = br.readLine()) != null) {
@@ -47,21 +44,31 @@ public class Http {
             URL uri = new URL(url);
             conn = (HttpURLConnection) uri.openConnection();
             conn.setRequestMethod("POST");
+            conn.setReadTimeout(5000);
+            conn.setConnectTimeout(10000);
             conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded");
-            conn.setRequestProperty("Content-Length", String.valueOf(params.getBytes().length));
-            conn.setDoInput(true);
             conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setRequestProperty("Charset", "UTF-8");
+            conn.setUseCaches(false);
             conn.connect();
-            conn.getOutputStream().write(params.getBytes("UTF-8"));//将参数写入输出流
-            conn.getOutputStream().flush();
-            conn.getOutputStream().close();
+            OutputStream out=conn.getOutputStream();
+            out.write(params.getBytes());
+            out.flush();
+            out.close();
 
+            int responseCode = conn.getResponseCode();
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String msg = "";
-            while ((msg = br.readLine()) != null) {
-                sb.append(msg);
+            if(200 == responseCode){
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String msg = "";
+                while ((msg = br.readLine()) != null) {
+                    sb.append(msg);
+                }
             }
+
+
+
         }catch (Exception e){
             e.printStackTrace();
         }finally {
