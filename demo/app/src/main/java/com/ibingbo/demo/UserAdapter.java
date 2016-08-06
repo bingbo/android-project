@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  * Created by zhangbingbing on 16/8/1.
@@ -16,14 +17,21 @@ import org.json.JSONArray;
 public class UserAdapter extends BaseAdapter {
 
     private Context context;
+
+    public void setUserList(JSONArray userList) {
+        this.userList = userList;
+    }
+
     private JSONArray userList;
     private LayoutInflater inflater;
 
-    public UserAdapter(Context ctx, JSONArray users){
+    public UserAdapter(Context ctx, JSONArray users) {
         context = ctx;
-        userList=users;
-        inflater= (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        userList = users;
+        inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+
+
     @Override
     public int getCount() {
         return userList.length();
@@ -36,23 +44,30 @@ public class UserAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position;
+        long id = 0;
+        try {
+            id = userList.getJSONObject(position).getLong("id");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
         HolderView holderView = new HolderView();
 
-        View rowView = inflater.inflate(R.layout.user_item,null);
-        holderView.userId = (TextView)rowView.findViewById(R.id.userId);
-        holderView.userName = (TextView)rowView.findViewById(R.id.userName);
-        holderView.userPwd = (TextView)rowView.findViewById(R.id.userPwd);
-        holderView.userEmail = (TextView)rowView.findViewById(R.id.userEmail);
+        View rowView = inflater.inflate(R.layout.user_item, null);
+        holderView.userId = (TextView) rowView.findViewById(R.id.userId);
+        holderView.userName = (TextView) rowView.findViewById(R.id.userName);
+        holderView.userPwd = (TextView) rowView.findViewById(R.id.userPwd);
+        holderView.userEmail = (TextView) rowView.findViewById(R.id.userEmail);
         try {
             holderView.userId.setText(userList.getJSONObject(position).getString("id"));
             holderView.userName.setText(userList.getJSONObject(position).getString("name"));
             holderView.userPwd.setText(userList.getJSONObject(position).getString("password"));
             holderView.userEmail.setText(userList.getJSONObject(position).getString("email"));
+            /*长按弹出菜单事件与单击事件不能共存
             rowView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -63,14 +78,15 @@ public class UserAdapter extends BaseAdapter {
                     }
                 }
             });
+            */
             return rowView;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public class HolderView{
+    public class HolderView {
         public TextView userId;
         public TextView userName;
         public TextView userPwd;

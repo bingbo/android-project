@@ -6,6 +6,10 @@ package com.ibingbo.models;
 public class User {
 
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private int id;
     private String name;
     private String password;

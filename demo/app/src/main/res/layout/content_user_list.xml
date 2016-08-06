@@ -39,6 +39,7 @@
         android:id="@+id/userlist"
         android:divider="#f9b68b"
         android:dividerHeight="1.0dip"
+        android:longClickable="true"
         android:layout_height="match_parent"></ListView>
 
 </LinearLayout>
