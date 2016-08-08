@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Safe Hybrid App</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="css/styles.css"/>
+
+</head>
+
+<body>
+
+<div class="container">
+    <nav class="navbar-inverse navbar-fixed-top navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#w0-collapse"><span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span></button>
+                <a class="navbar-brand" href="/">IBingBo</a></div>
+            <div id="w0-collapse" class="collapse navbar-collapse">
+                <ul id="w1" class="navbar-nav navbar-right nav">
+                    <li><a href="/android_asset/www/index.html">Home</a></li>
+                    <li><a href="/android_asset/www/about.html" tabindex="-1">About</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/android_asset/www/contact.html" tabindex="-1">Contact</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/android_asset/www/login.html" tabindex="-1">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container page-body">
+
+        <!--<input type="button" value="Say hello" onClick="showAndroidToast('Hello Android!')"/>-->
+        <div class="page-header">
+            <h1>联系人首页 <small>所有的联系人列表</small></h1>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>name</th>
+                    <th>phone</th>
+                    <!--<th>email</th>-->
+                    <th>操作</th></tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/user.js"></script>
+<script type="text/javascript">
+
+    function contact_delete(id){
+        User.delete(id);
+    }
+    function listContactCallback(result){
+        console.log('11111111111');
+        console.log(result);
+        var $tbody = $('tbody');
+        for(var i=0;i<result.length;i++){
+            $tbody.append(
+                '<tr><td>'+result[i].id+
+                '</td><td>'+result[i].name+
+                '</td><td>'+result[i].phone+
+                <!--'</td><td>'+result[i].email+-->
+                '</td><td>'+
+                '<span onclick="contact_delete('+result[i].id+')" class="btn btn-danger btn-xs">删除</span>'+
+                '</td></tr>'
+            );
+        }
+    }
+    Demo.loadContactsData();
+</script>
+</html>

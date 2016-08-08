@@ -1,20 +1,25 @@
 package com.ibingbo.demo.web;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.BatteryManager;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.Window;
 import android.webkit.ConsoleMessage;
 import android.webkit.HttpAuthHandler;
@@ -30,6 +35,9 @@ import android.widget.Toast;
 
 import com.ibingbo.component.receiver.BootCompleteReceiver;
 import com.ibingbo.component.receiver.NetworkStateReceiver;
+import com.ibingbo.component.service.ListenService;
+import com.ibingbo.demo.LoginActivity;
+import com.ibingbo.demo.MainActivity;
 import com.ibingbo.demo.R;
 import com.ibingbo.models.User;
 import com.ibingbo.service.web.UserService;
@@ -43,6 +51,9 @@ public class IndexActivity extends AppCompatActivity {
     private WebView indexView;
     private UserService userService;
     private Activity activity;
+    private Toolbar toolbar;
+
+    private NetworkStateReceiver netReceiver;
 
     private final String TAG = "DEMO_INDEX_ACTIVITY";
 
@@ -53,19 +64,21 @@ public class IndexActivity extends AppCompatActivity {
         getWindow().requestFeature(Window.FEATURE_PROGRESS);
         setContentView(R.layout.activity_index);
 
-        /***********动态注册监听广播,静态注册在manifest配置文件里***************/
-        //监听网络变化
-        IntentFilter filter=new IntentFilter();
-        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        this.registerReceiver(new NetworkStateReceiver(),filter);
+        //手动发送广播
+        //这里开机启动广播开始推送消息
+        Intent intent=new Intent(this, BootCompleteReceiver.class);
+        intent.putExtra("msg","hello, receiver...");
+        this.sendBroadcast(intent);
 
-        //监听电量变化
-//        IntentFilter filter1=new IntentFilter();
-//        filter1.addAction(BatteryManager.ACTION_CHARGING);
-//        this.registerReceiver(new BootCompleteReceiver(),filter1);
-        /***********注册监听广播***************/
+        //启用监听服务,监听网络,电量等状态变化
+        Intent listenIntent = new Intent(this, ListenService.class);
+        startService(listenIntent);
+
 
         activity = this;
+
+        toolbar=(Toolbar)findViewById(R.id.my_toolbar);
+        this.setSupportActionBar(toolbar);
 
         userService = new UserService(this);
         indexView = (WebView) this.findViewById(R.id.indexView);
@@ -81,6 +94,30 @@ public class IndexActivity extends AppCompatActivity {
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
 
         indexView.loadUrl("file:///android_asset/www/index.html");
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        this.getMenuInflater().inflate(R.menu.action_bar_menu,menu);
+        menu.getItem(0).setVisible(false);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.web_view_menu:
+                return true;
+            case R.id.native_view_menu:
+                Intent intent1=new Intent(this,MainActivity.class);
+                startActivity(intent1);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
     @Override
@@ -105,6 +142,7 @@ public class IndexActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.i(TAG,"on destroy....");
+        this.unregisterReceiver(netReceiver);
     }
 
     @Override
@@ -154,11 +192,7 @@ public class IndexActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.i(TAG,"on start....");
-        //手动发送广播
-        //这里开机启动广播开始推送消息
-        Intent intent=new Intent(this, BootCompleteReceiver.class);
-        intent.putExtra("msg","hello, receiver...");
-        this.sendBroadcast(intent);
+
     }
 
     @Override
@@ -372,4 +406,6 @@ public class IndexActivity extends AppCompatActivity {
             IndexActivity.this.setProgress(newProgress * 100);
         }
     }
+
+
 }

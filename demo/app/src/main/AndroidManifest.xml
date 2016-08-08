@@ -16,7 +16,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name" />
@@ -54,13 +54,16 @@
             android:name="com.ibingbo.component.receiver.BatteryChangedReceiver"
             android:enabled="true"
             android:exported="true">
-            <!--静态注册广播监听电量变化-->
+
+            <!-- 静态注册广播监听电量变化 -->
             <intent-filter>
-                <action android:name="android.intent.action.BATTERY_CHANGED"/>
-                <action android:name="android.intent.action.BATTERY_LOW"/>
-                <action android:name="android.intent.action.BATTERY_OKAY"/>
+                <action android:name="android.intent.action.BATTERY_CHANGED" />
+                <action android:name="android.intent.action.BATTERY_LOW" />
+                <action android:name="android.intent.action.BATTERY_OKAY" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

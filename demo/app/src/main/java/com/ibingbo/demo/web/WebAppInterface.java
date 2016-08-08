@@ -7,6 +7,7 @@ import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.ibingbo.models.User;
+import com.ibingbo.service.ContactService;
 import com.ibingbo.service.web.UserService;
 
 import org.json.JSONArray;
@@ -87,6 +88,18 @@ public class WebAppInterface {
             @Override
             public void run() {
                 webView.reload();
+            }
+        });
+    }
+
+    @JavascriptInterface
+    public void loadContactsData(){
+        ContactService service=new ContactService(context);
+        final JSONArray result = service.getContactList();
+        this.webView.post(new Runnable() {
+            @Override
+            public void run() {
+                webView.loadUrl("javascript:listContactCallback(" + result + ")");
             }
         });
     }
