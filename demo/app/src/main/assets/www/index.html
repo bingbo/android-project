@@ -77,7 +77,6 @@
         User.delete(id);
     }
     function listCallback(result){
-        console.log(result);
         var $tbody = $('tbody');
         for(var i=0;i<result.length;i++){
             $tbody.append(
@@ -90,7 +89,9 @@
                 '</td></tr>'
             );
         }
+        Demo.showProgress(false);
     }
+    Demo.showProgress(true);
     Demo.loadData();
 </script>
 </html>

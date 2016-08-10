@@ -1,7 +1,9 @@
 package com.ibingbo.demo.web;
 
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
@@ -13,10 +15,15 @@ import android.net.http.SslError;
 import android.os.BatteryManager;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +43,7 @@ import android.widget.Toast;
 import com.ibingbo.component.receiver.BootCompleteReceiver;
 import com.ibingbo.component.receiver.NetworkStateReceiver;
 import com.ibingbo.component.service.ListenService;
+import com.ibingbo.demo.CameraActivity;
 import com.ibingbo.demo.LoginActivity;
 import com.ibingbo.demo.MainActivity;
 import com.ibingbo.demo.R;
@@ -44,6 +52,8 @@ import com.ibingbo.service.web.UserService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
 
 
 public class IndexActivity extends AppCompatActivity {
@@ -56,6 +66,7 @@ public class IndexActivity extends AppCompatActivity {
     private NetworkStateReceiver netReceiver;
 
     private final String TAG = "DEMO_INDEX_ACTIVITY";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +91,9 @@ public class IndexActivity extends AppCompatActivity {
         toolbar=(Toolbar)findViewById(R.id.my_toolbar);
         this.setSupportActionBar(toolbar);
 
+        ActionBar bar=this.getSupportActionBar();
+        bar.setDisplayHomeAsUpEnabled(true);
+
         userService = new UserService(this);
         indexView = (WebView) this.findViewById(R.id.indexView);
         indexView.setWebViewClient(new MyWebViewClient());
@@ -101,7 +115,34 @@ public class IndexActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         this.getMenuInflater().inflate(R.menu.action_bar_menu,menu);
-        menu.getItem(0).setVisible(false);
+        menu.findItem(R.id.web_view_menu).setVisible(false);
+
+        //为搜索菜单添加相应的动作
+        MenuItem searchItem=menu.findItem(R.id.action_search);
+        SearchView searchView=(SearchView) MenuItemCompat.getActionView(searchItem);
+        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                Log.i(TAG,"search expand...");
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                Log.i(TAG,"search collapse...");
+                return true;
+            }
+        });
+
+        //为分享菜单添加相应的动作
+        MenuItem shareItem=menu.findItem(R.id.action_share);
+        ShareActionProvider shareActionProvider= (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("image/*");
+        Uri uri = Uri.fromFile(new File(getFilesDir(), "foo.jpg"));
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri.toString());
+        shareActionProvider.setShareIntent(shareIntent);
+
         return true;
     }
 
@@ -113,6 +154,10 @@ public class IndexActivity extends AppCompatActivity {
             case R.id.native_view_menu:
                 Intent intent1=new Intent(this,MainActivity.class);
                 startActivity(intent1);
+                return true;
+            case R.id.take_pic_menu:
+                Intent intent=new Intent(this, CameraActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -247,7 +292,9 @@ public class IndexActivity extends AppCompatActivity {
          */
         @Override
         public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-            Toast.makeText(IndexActivity.this, "Oh no! " + error.getDescription(), Toast.LENGTH_SHORT).show();
+            Toast toast=Toast.makeText(IndexActivity.this, "Oh no! " + error.getDescription(), Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
         }
 
         /**

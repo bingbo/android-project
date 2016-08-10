@@ -74,8 +74,6 @@
         User.delete(id);
     }
     function listContactCallback(result){
-        console.log('11111111111');
-        console.log(result);
         var $tbody = $('tbody');
         for(var i=0;i<result.length;i++){
             $tbody.append(
@@ -88,7 +86,9 @@
                 '</td></tr>'
             );
         }
+        Demo.showProgress(false);
     }
+    Demo.showProgress(true);
     Demo.loadContactsData();
 </script>
 </html>

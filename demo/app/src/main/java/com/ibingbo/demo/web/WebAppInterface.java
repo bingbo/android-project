@@ -1,7 +1,11 @@
 package com.ibingbo.demo.web;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.view.Gravity;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -18,15 +22,24 @@ import org.json.JSONArray;
 public class WebAppInterface {
     private Context context;
     private WebView webView;
+    private AlertDialog.Builder builder;
+    private AlertDialog alertDialog;
+    private ProgressDialog progressDialog;
 
     public WebAppInterface(Context context,WebView webView){
         this.context=context;
         this.webView=webView;
+        this.builder=new AlertDialog.Builder(context);
+        this.progressDialog=new ProgressDialog(context);
+        this.progressDialog.setMessage("load....");
+
     }
 
     @JavascriptInterface
     public void showToast(String toast){
-        Toast.makeText(this.context,toast,Toast.LENGTH_LONG).show();
+        Toast t= Toast.makeText(this.context,toast,Toast.LENGTH_LONG);
+        t.setGravity(Gravity.CENTER,0,0);
+        t.show();
         this.webView.post(new Runnable() {
             @Override
             public void run() {
@@ -81,15 +94,31 @@ public class WebAppInterface {
     }
 
     @JavascriptInterface
-    public void delete(String id){
-        UserService service=new UserService(context);
-        boolean res = service.deleteUserById(id);
-        this.webView.post(new Runnable() {
-            @Override
-            public void run() {
-                webView.reload();
-            }
-        });
+    public void delete(final String id){
+        this.builder.setMessage("are you sure to delete?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        UserService service=new UserService(context);
+                        boolean res = service.deleteUserById(id);
+                        webView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                webView.reload();
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+        this.alertDialog=this.builder.create();
+        this.alertDialog.show();
+
     }
 
     @JavascriptInterface
@@ -104,4 +133,12 @@ public class WebAppInterface {
         });
     }
 
+    @JavascriptInterface
+    public void showProgress(boolean show){
+        if(show){
+            this.progressDialog.show();
+        }else {
+            this.progressDialog.hide();
+        }
+    }
 }
