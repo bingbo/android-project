@@ -8,10 +8,9 @@ import android.content.Intent;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.ibingbo.component.service.MsgPushService;
-import com.ibingbo.demo.MainActivity;
+import com.ibingbo.demo.MainActivity1;
 
 public class BootCompleteReceiver extends BroadcastReceiver {
 
@@ -28,10 +27,10 @@ public class BootCompleteReceiver extends BroadcastReceiver {
         builder.setContentTitle("My Notifiaction")
                 .setContentText("Hello,start to push message...")
         .setSmallIcon(android.support.v7.appcompat.R.drawable.notification_template_icon_bg);
-        Intent intent1=new Intent(context, MainActivity.class);
+        Intent intent1=new Intent(context, MainActivity1.class);
 
         TaskStackBuilder stackBuilder=TaskStackBuilder.create(context);
-        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addParentStack(MainActivity1.class);
         stackBuilder.addNextIntent(intent1);
         PendingIntent pendingIntent=stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(pendingIntent);

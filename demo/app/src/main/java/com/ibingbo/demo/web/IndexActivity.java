@@ -1,19 +1,12 @@
 package com.ibingbo.demo.web;
 
 import android.app.Activity;
-import android.app.SearchManager;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Configuration;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.net.http.SslError;
-import android.os.BatteryManager;
-import android.provider.ContactsContract;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
@@ -44,8 +37,7 @@ import com.ibingbo.component.receiver.BootCompleteReceiver;
 import com.ibingbo.component.receiver.NetworkStateReceiver;
 import com.ibingbo.component.service.ListenService;
 import com.ibingbo.demo.CameraActivity;
-import com.ibingbo.demo.LoginActivity;
-import com.ibingbo.demo.MainActivity;
+import com.ibingbo.demo.MainActivity1;
 import com.ibingbo.demo.R;
 import com.ibingbo.models.User;
 import com.ibingbo.service.web.UserService;
@@ -100,6 +92,9 @@ public class IndexActivity extends AppCompatActivity {
         indexView.setWebChromeClient(new MyChromeClient());
         indexView.addJavascriptInterface(new WebAppInterface(this, indexView), "Demo");
         indexView.requestFocus();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
 
 
         WebSettings settings = indexView.getSettings();
@@ -152,7 +147,7 @@ public class IndexActivity extends AppCompatActivity {
             case R.id.web_view_menu:
                 return true;
             case R.id.native_view_menu:
-                Intent intent1=new Intent(this,MainActivity.class);
+                Intent intent1=new Intent(this,MainActivity1.class);
                 startActivity(intent1);
                 return true;
             case R.id.take_pic_menu:

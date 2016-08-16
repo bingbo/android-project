@@ -4,9 +4,21 @@
 
     <item android:id="@+id/action_search"
         android:title="search"
-        android:icon="@drawable/demo"
+        android:icon="@android:drawable/ic_menu_search"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView"/>
+    <item android:id="@+id/action_refresh"
+        android:title="refresh"
+        android:icon="@drawable/ic_action_refresh"
+        app:showAsAction="ifRoom"/>
+    <item android:id="@+id/action_location"
+        android:title="location"
+        android:icon="@drawable/ic_action_location"
+        app:showAsAction="ifRoom"/>
+    <item android:id="@+id/action_settings"
+        android:title="settings"
+        android:icon="@drawable/ic_action_settings"
+        app:showAsAction="ifRoom"/>
     <item android:id="@+id/web_view_menu"
         android:title="web app"
         app:showAsAction="ifRoom"/>
@@ -23,4 +35,14 @@
     <item android:id="@+id/take_video_menu"
         android:title="takevideo"
         app:showAsAction="never"/>
+    <item android:id="@+id/card_view_menu"
+        android:title="card_view"
+        app:showAsAction="never"/>
+    <item android:id="@+id/angular_app_menu"
+        android:title="angular App"
+        app:showAsAction="never"/>
+    <item android:id="@+id/react_app_menu"
+        android:title="react App"
+        app:showAsAction="never"/>
+
 </menu>
