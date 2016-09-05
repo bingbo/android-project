@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.ibingbo.demo.fragment.CardViewFragment;
 import com.ibingbo.demo.fragment.PlaceholderFragment;
 import com.ibingbo.demo.fragment.RecyclerViewFragment;
+import com.ibingbo.demo.fragment.TextSwitcherFragment;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -31,6 +32,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return CardViewFragment.newInstance(position + 1);
             case 1:
                 return RecyclerViewFragment.newInstance(position + 1);
+            case 2:
+                return TextSwitcherFragment.newInstance(position + 1);
             default:
                 return PlaceholderFragment.newInstance(position + 1);
         }
@@ -40,7 +43,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // Show 3 total pages.
-        return 3;
+        return 5;
     }
 
     @Override
@@ -52,6 +55,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return "SECTION 2";
             case 2:
                 return "SECTION 3";
+            case 3:
+                return "SECTION 4";
+            case 4:
+                return "SECTION 5";
         }
         return null;
     }
